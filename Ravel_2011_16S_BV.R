@@ -35,12 +35,12 @@ ncbi_metadata$PMID <- '20534435'
 ## Data from the supplementary tables
 ## This data had to be downloaded manually from the PNAS site.
 ## For some reason curl and wget didn't work at this time (05/02/2022)
-
 st04 <- readxl::read_xlsx(
     'Ravel_2011_16S_BV_st04.xlsx', sheet = 1, range = 'A3:IU397'
 ) %>%
-    as.data.frame() %>%
-    rename(sample_id = 'Subject ID')
+    as.data.frame()
+colnames(st04)[1] <- 'sample_id'
+    # rename(sample_id = 'Subject ID')
 pnas_metadata <- st04[,1:7]
 new_col_names <- c(
     'sample_id', 'ethnicity', 'ph', 'nugent_score',
@@ -80,6 +80,9 @@ rownames(taxonomy_table) <- rownames(relab)
 
 # Microbial signatures ----------------------------------------------------
 
+## This chunck of code might require a separate script just to generate the
+## signatures.
+
 url <- 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTo8BOwXFXyzqBrZYIHuOLnYPnCLPKFt3rkYG5DYEycyjv7sCbNKuVhgL1LzLaT7DjqYOnmb02I_gMv/pub?gid=0&single=true&output=tsv'
 
 sig <- read.table(url, sep = '\t', header = TRUE)
@@ -96,10 +99,12 @@ sig2 <- sig %>%
     select(Taxon_name, Attribute) %>%
     distinct()
 
-signatures <-
+taxonomy_table <-
     left_join(taxonomy_table, sig2, by = c('genus' = 'Taxon_name'))
 
-write.table(signatures, 'signatures.tsv', sep = '\t', row.names = FALSE,
+rownames(taxonomy_table) <- rownames(relab)
+
+write.table(sig, 'BV_signatures.tsv', sep = '\t', row.names = FALSE,
             col.names = TRUE)
 
 # Check with SE -----------------------------------------------------------
@@ -116,8 +121,8 @@ se <- SummarizedExperiment(
 
 ## Export files
 
-
-## For consistency let's export abundance matrix as counts
+## For consistency with the other datasets let's export abundance matrix as
+## counts
 
 counts <-
    t(apply(t(relab), 2, function(x) {
@@ -125,7 +130,7 @@ counts <-
        }
       )
     )
-
+colnames(counts) <- tolower(colnames(counts))
 write.table(
     counts, 'Ravel_2011_16S_BV_count_matrix.tsv', sep = '\t',
     row.names = TRUE, col.names = TRUE

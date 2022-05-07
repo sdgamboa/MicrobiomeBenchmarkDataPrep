@@ -17,11 +17,16 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    biomformat,
     dplyr,
     magrittr,
     phyloseq,
+    purrr,
     readxl,
     S4Vectors,
     SummarizedExperiment,
+    taxizedb,
+    tibble,
+    tidyr,
     TreeSummarizedExperiment,
     utils
