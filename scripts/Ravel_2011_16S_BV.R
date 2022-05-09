@@ -1,4 +1,3 @@
-
 ## This script prepares the dataset for one of the datasets for bacterial
 ## vaginosis (dataset 1)
 
@@ -12,7 +11,8 @@ library(dplyr)
 library(readr)
 library(SummarizedExperiment)
 library(S4Vectors)
-source('utils.R')
+library(readxl)
+source('scripts/utils.R')
 
 # Sample metadata ---------------------------------------------------------
 
@@ -21,7 +21,7 @@ source('utils.R')
 ## 2) From the supplementary data of the article.
 
 ## Data from the NCBI
-ncbi_metadata <- read.csv('Ravel_2011_16S_BV_SRA022855_run_metadata.csv')
+ncbi_metadata <- read.csv('data/Ravel_2011_16S/Ravel_2011_16S_BV_SRA022855_run_metadata.csv')
 select_cols <- c(
     sample_id = 'SampleName',
     sequencing_platform = 'Platform', NCBI_accession = 'Run',
@@ -35,8 +35,8 @@ ncbi_metadata$PMID <- '20534435'
 ## Data from the supplementary tables
 ## This data had to be downloaded manually from the PNAS site.
 ## For some reason curl and wget didn't work at this time (05/02/2022)
-st04 <- readxl::read_xlsx(
-    'Ravel_2011_16S_BV_st04.xlsx', sheet = 1, range = 'A3:IU397'
+st04 <- read_xlsx(
+    'data/Ravel_2011_16S/Ravel_2011_16S_BV_st04.xlsx', sheet = 1, range = 'A3:IU397'
 ) %>%
     as.data.frame()
 colnames(st04)[1] <- 'sample_id'
@@ -104,7 +104,7 @@ taxonomy_table <-
 
 rownames(taxonomy_table) <- rownames(relab)
 
-write.table(sig, 'BV_signatures.tsv', sep = '\t', row.names = FALSE,
+write.table(sig, 'data/signatures/BV_signatures.tsv', sep = '\t', row.names = FALSE,
             col.names = TRUE)
 
 # Check with SE -----------------------------------------------------------
@@ -132,19 +132,19 @@ counts <-
     )
 colnames(counts) <- tolower(colnames(counts))
 write.table(
-    counts, 'Ravel_2011_16S_BV_count_matrix.tsv', sep = '\t',
+    counts, 'data/Ravel_2011_16S/Ravel_2011_16S_BV_count_matrix.tsv', sep = '\t',
     row.names = TRUE, col.names = TRUE
 )
 
 ## Export sample_metadata
 write.table(
-    sample_metadata, 'Ravel_2011_16S_BV_sample_metadata.tsv', sep = '\t',
+    sample_metadata, 'data/Ravel_2011_16S/Ravel_2011_16S_BV_sample_metadata.tsv', sep = '\t',
     row.names = TRUE, col.names = TRUE
 )
 
 ## Export taxonomy_table
 write.table(
-    taxonomy_table, 'Ravel_2011_16S_BV_taxonomy_table.tsv', sep = '\t',
+    taxonomy_table, 'data/Ravel_2011_16S/Ravel_2011_16S_BV_taxonomy_table.tsv', sep = '\t',
     row.names = TRUE, col.names = TRUE
 )
 
