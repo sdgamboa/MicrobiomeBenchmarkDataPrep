@@ -1,5 +1,13 @@
 
+# Prepare data for MicrobiomeBenchmarkData
 
+## Files
+
++ Data files uploaded to Zenodo are in the `data` directory.
++ Other files that were necessary are in the `other_data` directory.
++ Scripts for generating the files in both `data` and `other_data` are stored in the `scripts` directory.
+
+## Datasets components
 
 | Dataset | count matrix | sample metadata | taxonomy table | taxa annotations | phylogenetic tree |
 | ------- | ------------ | --------------- | -------------- | ---------------- | ----------------- |
