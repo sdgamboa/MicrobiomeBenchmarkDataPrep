@@ -1,0 +1,18 @@
+sample_id	subject_id	description	study_condition	ncbi_accession	body_site	country	sequencing_platform	pmid
+MID26	Patient2	TT1	preASCT	ERR1193483	stool	Germany	Roche 454	27329048
+MID27	Patient1	TO1	preASCT	ERR1193484	stool	Germany	Roche 454	27329048
+MID28	Patient1	TO2	d0	ERR1193485	stool	Germany	Roche 454	27329048
+MID29	Patient1	TO3	d7	ERR1193486	stool	Germany	Roche 454	27329048
+MID30	Patient1	TO4	d14	ERR1193487	stool	Germany	Roche 454	27329048
+MID32	Patient2	TT2	d0	ERR1193488	stool	Germany	Roche 454	27329048
+MID33	Patient2	TT3	d7	ERR1193489	stool	Germany	Roche 454	27329048
+MID34	Patient2	TT4	d14	ERR1193490	stool	Germany	Roche 454	27329048
+MID35	Patient3	TX2	d0	ERR1193491	stool	Germany	Roche 454	27329048
+MID36	Patient3	TX3	d7	ERR1193492	stool	Germany	Roche 454	27329048
+MID37	Patient3	TX4	d14	ERR1193493	stool	Germany	Roche 454	27329048
+MID38	Patient4	TZ1	preASCT	ERR1193494	stool	Germany	Roche 454	27329048
+MID39	Patient4	TZ2	d0	ERR1193495	stool	Germany	Roche 454	27329048
+MID40	Patient4	TZ3	d7	ERR1193496	stool	Germany	Roche 454	27329048
+MID41	Patient5	UN1	preASCT	ERR1193497	stool	Germany	Roche 454	27329048
+MID42	Patient5	UN2	d0	ERR1193498	stool	Germany	Roche 454	27329048
+MID43	Patient5	UN4	d14	ERR1193499	stool	Germany	Roche 454	27329048
