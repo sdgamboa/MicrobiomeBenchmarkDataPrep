@@ -234,4 +234,5 @@ write.tree(phy = v35_row_tree, file = "data/HMP_2012_16S_gingival_V35_taxonomy_t
 write.tree(phy = v13_row_tree, file = "data/HMP_2012_16S_gingival_V13_taxonomy_tree.newick")
 ## Save taxonomy tables
 write_tsv(v35_row_data, "data/HMP_2012_16S_gingival_V35_taxonomy_table.tsv")
-write_tsv(v13_row_data, 'data/HMP_2012_16S_gingival_V35_taxonomy_table.tsv')
+write_tsv(v13_row_data, 'data/HMP_2012_16S_gingival_V13_taxonomy_table.tsv')
+
