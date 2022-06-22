@@ -16,6 +16,9 @@ library(ape)
 v35se <- HMP16SData::V35()
 v13se <- HMP16SData::V13()
 
+colData(v35se)$library_size <- colSums(assay(v35se))
+colData(v13se)$library_size <- colSums(assay(v13se))
+
 v35tse <- TreeSummarizedExperiment(
     assays = SimpleList(counts = assay(v35se)),
     colData = colData(v35se),
@@ -120,22 +123,34 @@ if (nrow(v35_col_data) > nrow(v13_col_data)) {
 
 v13_col_data[v13_col_data$sample_id == '700023388',]$run_center <- 'WUGC'
 
-if (identical(v13_col_data, v35_col_data)) {
-    hmp_gingival_samples <-
+# if (identical(v13_col_data, v35_col_data)) {
+    # hmp_gingival_samples <-
+    #     intersect(v13_col_data$sample_id, v35_col_data$sample_id)
+#     # generate sample metadata
+#     col_data <- v13_col_data # Either v13 or v35 works
+# } else {
+#     stop("Metadata are not identical.")
+# }
+
+hmp_gingival_samples <-
         intersect(v13_col_data$sample_id, v35_col_data$sample_id)
-    # generate sample metadata
-    col_data <- v13_col_data # Either v13 or v35 works
-} else {
-    stop("Metadata are not identical.")
-}
 
 ## Add some other necessary columns
-col_data <- col_data %>%
+v13_col_data <- v13_col_data %>%
     mutate(
         study_condition = 'control',
-        disease = 'healthy'
+        disease = 'healthy',
+        sequencing_method = '16S',
+        variable_region_16s = 'V1-3'
     )
 
+v35_col_data <- v35_col_data %>%
+    mutate(
+        study_condition = 'control',
+        disease = 'healthy',
+        sequencing_method = '16S',
+        variable_region_16s = 'V3-5'
+    )
 
 ## Remove taxon_name with no counts
 
@@ -187,7 +202,12 @@ v13_row_data <- rowData(v13_subset) %>%
 
 # Check that everything works ---------------------------------------------
 
-colData <- col_data %>%
+v13colData <- v13_col_data %>%
+    tibble::column_to_rownames(var = "sample_id") %>%
+    as.data.frame() %>%
+    DataFrame()
+
+v35colData <- v35_col_data %>%
     tibble::column_to_rownames(var = "sample_id") %>%
     as.data.frame() %>%
     DataFrame()
@@ -202,9 +222,16 @@ v13rowData <- v13_row_data %>%
     as.data.frame() %>%
     DataFrame()
 
-tse <- TreeSummarizedExperiment(
+tse_v35 <- TreeSummarizedExperiment(
+    assays = SimpleList(counts = v35_count_matrix),
+    colData = v35colData,
+    rowData  = v35rowData,
+    rowTree = v35_row_tree
+)
+
+tse_v13 <- TreeSummarizedExperiment(
     assays = SimpleList(counts = v13_count_matrix),
-    colData = colData,
+    colData = v13colData,
     rowData  = v13rowData,
     rowTree = v13_row_tree
 )
@@ -225,7 +252,8 @@ v13_count_matrix_df <- v13_count_matrix %>%
     as_tibble()
 
 ## Save sample metadata
-write_tsv(col_data, "data/HMP_2012_16S_gingival_sample_metadata.tsv")
+write_tsv(v35_col_data, "data/HMP_2012_16S_gingival_V35_sample_metadata.tsv")
+write_tsv(v13_col_data, "data/HMP_2012_16S_gingival_V13_sample_metadata.tsv")
 ## Save count matrix
 write_tsv(v35_count_matrix_df, "data/HMP_2012_16S_gingival_V35_count_matrix.tsv")
 write_tsv(v13_count_matrix_df, "data/HMP_2012_16S_gingival_V13_count_matrix.tsv")
