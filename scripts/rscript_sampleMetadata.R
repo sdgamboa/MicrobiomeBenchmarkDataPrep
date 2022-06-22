@@ -58,7 +58,8 @@ sampleMetadata <- datasets %>%
     map_if(.p = ~ 'subject_id' %in% colnames(.x),
            .f = ~ mutate(.x, subject_id = as.character(subject_id))
     ) %>%
-    bind_rows(.id = 'dataset')
+    bind_rows(.id = 'dataset') %>%
+    mutate(gender = tolower(gender))
 
 ## Export file as tsv (this for upload to Zenodo)
 write_tsv(sampleMetadata, "data/sampleMetadata.tsv")
