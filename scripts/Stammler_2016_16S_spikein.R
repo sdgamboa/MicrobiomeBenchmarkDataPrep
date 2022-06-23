@@ -157,6 +157,8 @@ tse <- TreeSummarizedExperiment(
 ## Add library size to sample metadata
 
 col_data$library_size <- colSums(SCML_data)
+col_data$sequencing_method <- '16S'
+col_data$variable_region_16s <- 'V3-6'
 
 SCML_data_df <- SCML_data %>%
     as.data.frame() %>%
