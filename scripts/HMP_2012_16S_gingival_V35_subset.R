@@ -42,7 +42,7 @@ col_data <- colData(tse) %>%
         visit_number = visitno,
         gender = sex,
         body_site = hmp_body_site,
-        body_subiste = hmp_body_subsite,
+        body_subsite = hmp_body_subsite,
         ncbi_accession = srs_sample_id
     ) %>%
     mutate(

@@ -1,4 +1,4 @@
-sample_id	subject_id	visit_number	gender	run_center	body_site	body_subiste	ncbi_accession	library_size	sequencing_method	variable_region_16s
+sample_id	subject_id	visit_number	gender	run_center	body_site	body_subsite	ncbi_accession	library_size	sequencing_method	variable_region_16s
 700023057	763698834	1	Female	WUGC	Oral	Subgingival Plaque	SRS014424	11970	16S	V3-5
 700023179	763638144	1	Female	WUGC	Oral	Subgingival Plaque	SRS014554	4968	16S	V3-5
 700023299	763597684	1	Male	WUGC	Oral	Subgingival Plaque	SRS014677	11642	16S	V3-5
