@@ -90,9 +90,19 @@ tree <- rowTree(tse)
 tree$tip.label <- sub('^.+\\|[a-z]__', '', tree$tip.label)
 count_matrix$taxon_name <- sub('^.+\\|[a-z]__', '', count_matrix$taxon_name)
 
+## Check that everything works
+
+assay_data <- count_matrix %>%
+    column_to_rownames(var = 'taxon_name') %>%
+    as.data.frame() %>%
+    as.matrix()
+
+
+
 # Export files ------------------------------------------------------------
 
 write_tsv(sample_metadata, "data/HMP_2012_WMS_gingival_sample_metadata.tsv")
 write_tsv(count_matrix, 'data/HMP_2012_WMS_gingival_count_matrix.tsv')
 write_tsv(taxonomy_table, 'data/HMP_2012_WMS_gingival_taxonomy_table.tsv')
 write.tree(phy = tree, file = 'data/HMP_2012_WMS_gingival_taxonomy_tree.newick')
+
