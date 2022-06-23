@@ -17,3 +17,15 @@
 | HMP_2012_WMS_gingival | yes | yes | yes | | yes |
 | Stammler_2016_16S_spikein | yes | yes | yes | yes | |
 | Ravel_2011_16S_BV | yes | yes | yes | yes | |
+
+## General instructions
+
+1. Update output files (those in the data directory).
+2. If sample metadata files where modified, run the sampleMetadata.R script as
+well.
+3. After commit and push, upload files to Zenodo.
+4. Go to the MicrobiomeBenchmarkData repo and update sampleMetadata and sysdata.
+
+
+
+
