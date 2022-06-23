@@ -22,8 +22,11 @@ format_sample_metadata <- function(df) {
         tibble::as_tibble()
 }
 
-HMP_2012_16S_gingival <-
-    read_tsv("data/HMP_2012_16S_gingival_sample_metadata.tsv")
+HMP_2012_16S_gingival_V13 <-
+    read_tsv("data/HMP_2012_16S_gingival_V13_sample_metadata.tsv")
+
+HMP_2012_16S_gingival_V35 <-
+    read_tsv("data/HMP_2012_16S_gingival_V35_sample_metadata.tsv")
 
 HMP_2012_16S_gingival_V35_subset <-
     read_tsv("data/HMP_2012_16S_gingival_V35_subset_sample_metadata.tsv")
@@ -45,7 +48,8 @@ Ravel_2011_16S_BV <-
 # Export merged metadata --------------------------------------------------
 
 datasets <- list(
-    HMP_2012_16S_gingival = HMP_2012_16S_gingival,
+    HMP_2012_16S_gingival_V13 = HMP_2012_16S_gingival_V13,
+    HMP_2012_16S_gingival_V35 = HMP_2012_16S_gingival_V35,
     HMP_2012_16S_gingival_V35_subset = HMP_2012_16S_gingival_V35_subset,
     HMP_2012_WMS_gingival = HMP_2012_WMS_gingival,
     # Beghini_2019_16S_smoking = Beghini_2019_16S_smoking,
