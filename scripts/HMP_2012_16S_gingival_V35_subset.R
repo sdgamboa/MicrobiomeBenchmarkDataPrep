@@ -9,7 +9,10 @@ library(tibble)
 library(readr)
 library(ape)
 library(magrittr)
+library(HMP16SData)
 
+v35se <- V35()
+colData(v35se)$library_size <- colSums(assay(v35se))
 
 import_calgaro_2020 <- function() {
     load(url("https://github.com/mcalgaro93/sc2meta/blob/master/data/16Sdatasets_for_replicability_filtered.RData?raw=true"))
@@ -20,6 +23,13 @@ import_calgaro_2020 <- function() {
 
 tse <- import_calgaro_2020()
 
+col_names <- colnames(tse)
+
+colData(tse)$library_size <- colData(v35se[,col_names])$library_size
+
+
+# colData(tse)$library_size <- colSums(assay(tse))
+
 # Sample metadata ---------------------------------------------------------
 
 col_data <- colData(tse) %>%
@@ -27,7 +37,7 @@ col_data <- colData(tse) %>%
     rownames_to_column(var = 'sample_id') %>%
     as_tibble() %>%
     set_colnames(tolower(colnames(.))) %>%
-    rename(
+    dplyr::rename(
         subject_id = rsid,
         visit_number = visitno,
         gender = sex,
@@ -66,7 +76,7 @@ row_data <-
     rownames_to_column(var = 'taxon_name') %>%
     as_tibble() %>%
     set_colnames(tolower(colnames(.))) %>%
-    rename(kingdom = superkingdom) %>%
+    dplyr::rename(kingdom = superkingdom) %>%
     left_join(annotations, by = "genus")
 
 # Export files ------------------------------------------------------------
@@ -84,3 +94,4 @@ write_tsv(count_matrix_df, 'data/HMP_2012_16S_gingival_V35_subset_count_matrix.t
 write_tsv(row_data, 'data/HMP_2012_16S_gingival_V35_subset_taxonomy_table.tsv')
 ## Export phylogenetic tree
 write.tree(row_tree, 'data/HMP_2012_16S_gingival_V35_subset_taxonomy_tree.newick')
+
