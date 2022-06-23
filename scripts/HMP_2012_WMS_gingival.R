@@ -53,7 +53,8 @@ sample_metadata <- tse %>%
         -study_name
     ) %>%
     mutate(
-        subject_id = sub('^.+_', '', subject_id)
+        subject_id = sub('^.+_', '', subject_id),
+        sequencing_method = 'WMS'
     )
 
 ## Taxonomy table
