@@ -83,6 +83,7 @@ for(i in seq(ncol(count_matrix))){
     SCML_data[,i] <- round(SCML_data[,i] / size_factor[i])
 }
 
+
 SCML_data['AF323500XXXX',]
 
 SCML_data['AB247615XXXX',]
@@ -152,6 +153,10 @@ tse <- TreeSummarizedExperiment(
 )
 
 # Export files ------------------------------------------------------------
+
+## Add library size to sample metadata
+
+col_data$library_size <- colSums(SCML_data)
 
 SCML_data_df <- SCML_data %>%
     as.data.frame() %>%
