@@ -23,16 +23,16 @@ format_sample_metadata <- function(df) {
 }
 
 HMP_2012_16S_gingival_V13 <-
-    read_tsv("data/HMP_2012_16S_gingival_V13_sample_metadata.tsv")
+    read_tsv("data/HMP_2012_16S_gingival_V13_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))
 
 HMP_2012_16S_gingival_V35 <-
-    read_tsv("data/HMP_2012_16S_gingival_V35_sample_metadata.tsv")
+    read_tsv("data/HMP_2012_16S_gingival_V35_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))
 
 HMP_2012_16S_gingival_V35_subset <-
-    read_tsv("data/HMP_2012_16S_gingival_V35_subset_sample_metadata.tsv")
+    read_tsv("data/HMP_2012_16S_gingival_V35_subset_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))
 
 HMP_2012_WMS_gingival <-
-    read_tsv("data/HMP_2012_WMS_gingival_sample_metadata.tsv")
+    read_tsv("data/HMP_2012_WMS_gingival_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))
 
 # Beghini_2019_16S_smoking <- readr::read_tsv(
     # file = "data-raw/Beghini_2019_16S_smoking_sample_metadata.tsv"
@@ -40,10 +40,10 @@ HMP_2012_WMS_gingival <-
     # format_sample_metadata()
 
 Stammler_2016_16S_spikein <-
-    read_tsv("data/Stammler_2016_16S_spikein_sample_metadata.tsv")
+    read_tsv("data/Stammler_2016_16S_spikein_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))
 
 Ravel_2011_16S_BV <-
-    read_tsv("data/Ravel_2011_16S_BV_sample_metadata.tsv")
+    read_tsv("data/Ravel_2011_16S_BV_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))
 
 # Export merged metadata --------------------------------------------------
 
