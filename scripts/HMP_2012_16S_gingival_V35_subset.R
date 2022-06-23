@@ -47,7 +47,8 @@ col_data <- colData(tse) %>%
     ) %>%
     mutate(
         sequencing_method = '16S',
-        variable_region_16s = 'V3-5'
+        variable_region_16s = 'V3-5',
+        body_site = 'oral_cavity'
     )
 
 

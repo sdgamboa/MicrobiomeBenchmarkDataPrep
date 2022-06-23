@@ -74,7 +74,8 @@ v35_col_data <- colData(v35tse) %>%
         body_site = tolower(body_site),
         body_subsite = sub(" " , "_", tolower(body_subsite)),
         sequencing_platform = 'Roche 454',
-        pmid = '22699609'
+        pmid = '22699609',
+        body_site = 'oral_cavity'
     )
 
 
@@ -104,7 +105,8 @@ v13_col_data <- colData(v13tse) %>%
         body_site = tolower(body_site),
         body_subsite = sub(" " , "_", tolower(body_subsite)),
         sequencing_platform = 'Roche 454',
-        pmid = '22699609'
+        pmid = '22699609',
+        body_site = 'oral_cavity'
     )
 
 if (nrow(v35_col_data) > nrow(v13_col_data)) {

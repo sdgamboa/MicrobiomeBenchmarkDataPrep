@@ -54,7 +54,8 @@ sample_metadata <- tse %>%
     ) %>%
     mutate(
         subject_id = sub('^.+_', '', subject_id),
-        sequencing_method = 'WMS'
+        sequencing_method = 'WMS',
+        body_site = 'oral_cavity'
     )
 
 ## Taxonomy table
