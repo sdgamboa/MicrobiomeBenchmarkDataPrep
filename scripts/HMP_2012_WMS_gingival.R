@@ -88,7 +88,7 @@ count_matrix <- tse %>%
 
 tree <- rowTree(tse)
 tree$tip.label <- sub('^.+\\|[a-z]__', '', tree$tip.label)
-rownames(tse) <- sub('^.+\\|[a-z]__', '', rownames(tse))
+count_matrix$taxon_name <- sub('^.+\\|[a-z]__', '', count_matrix$taxon_name)
 
 # Export files ------------------------------------------------------------
 
