@@ -73,7 +73,6 @@ v35_col_data <- colData(v35tse) %>%
         gender = tolower(gender),
         body_site = tolower(body_site),
         body_subsite = sub(" " , "_", tolower(body_subsite)),
-        # sequencing_type = '16S',
         sequencing_platform = 'Roche 454',
         pmid = '22699609'
     )
@@ -104,7 +103,6 @@ v13_col_data <- colData(v13tse) %>%
         gender = tolower(gender),
         body_site = tolower(body_site),
         body_subsite = sub(" " , "_", tolower(body_subsite)),
-        # sequencing_type = '16S',
         sequencing_platform = 'Roche 454',
         pmid = '22699609'
     )
