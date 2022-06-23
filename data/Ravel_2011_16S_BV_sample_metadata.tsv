@@ -1,4 +1,4 @@
-sample_id	sequencing_platform	ncbi_accession	number_bases	pmid	ethnicity	ph	nugent_score	nugent_score_category	community_group	number_reads	body_site	country	study_condition	gender
+sample_id	sequencing_platform	ncbi_accession	number_bases	pmid	ethnicity	ph	nugent_score	nugent_score_category	community_group	library_size	body_site	country	study_condition	gender
 S001	LS454	SRR062670	582939	20534435	Asian	4	0	low	I	2335	vagina	USA	bacterial_vaginosis	Female
 S002	LS454	SRR062671	354839	20534435	White	4	0	low	II	1403	vagina	USA	bacterial_vaginosis	Female
 S003	LS454	SRR062672	343968	20534435	Black	4	1	low	III	1376	vagina	USA	bacterial_vaginosis	Female

@@ -14,7 +14,7 @@ library(S4Vectors)
 library(readxl)
 library(readr)
 library(tibble)
-source('scripts/rscript_utils.R')
+source('scripts/utils.R')
 
 # Sample metadata ---------------------------------------------------------
 
@@ -139,12 +139,28 @@ taxonomy_table <-
 
 rownames(taxonomy_table) <- rownames(relab)
 
+
+# Add library size --------------------------------------------------------
+
+## Since we only have relative abundance, the total number of reads was
+## used as library size
+
+counts <-
+   t(apply(t(relab), 2, function(x) {
+       round(x * sample_metadata$number_reads / 100)
+       }
+      )
+    )
+
+sample_metadata <- sample_metadata %>%
+    dplyr::rename(library_size = number_reads)
+
 # Check with SE -----------------------------------------------------------
 
 ## Check Summarized Experiment
 ## This is only to check that all samples and taxa are in the right order
 se <- SummarizedExperiment(
-    assays = SimpleList(abundance = relab),
+    assays = SimpleList(abundance = counts),
     colData = DataFrame(sample_metadata),
     rowData = DataFrame(taxonomy_table)
 )
@@ -156,12 +172,6 @@ se <- SummarizedExperiment(
 ## For consistency with the other datasets let's export abundance matrix as
 ## counts
 
-counts <-
-   t(apply(t(relab), 2, function(x) {
-       round(x * sample_metadata$number_reads / 100)
-       }
-      )
-    )
 counts_df <- counts %>%
     as.data.frame() %>%
     rownames_to_column(var = 'taxon_name') %>%
