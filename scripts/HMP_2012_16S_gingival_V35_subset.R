@@ -44,7 +44,10 @@ col_data <- colData(tse) %>%
         body_site = hmp_body_site,
         body_subiste = hmp_body_subsite,
         ncbi_accession = srs_sample_id
-
+    ) %>%
+    mutate(
+        sequencing_method = '16S',
+        variable_region_16s = 'V3-5'
     )
 
 
