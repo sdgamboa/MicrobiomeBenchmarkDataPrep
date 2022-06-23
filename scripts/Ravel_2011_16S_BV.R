@@ -29,11 +29,13 @@ select_cols <- c(
     sequencing_platform = 'Platform', NCBI_accession = 'Run',
     number_bases = 'bases'
 
+
 )
 ncbi_metadata <- ncbi_metadata[, select_cols]
 colnames(ncbi_metadata) <- names(select_cols)
 ncbi_metadata$PMID <- '20534435'
-
+ncbi_metadata$sequencing_method <- '16S'
+ncbi_metadata$variable_region_16s <- 'V1-2'
 ## Data from the supplementary tables
 ## This data had to be downloaded manually from the PNAS site.
 ## For some reason curl and wget didn't work at this time (05/02/2022)
