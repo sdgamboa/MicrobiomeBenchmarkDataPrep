@@ -23,12 +23,22 @@ subjects <- as_tibble(sampleMetadata) %>%
 
 subjects_in_both <- intersect(subjects[[1]], subjects[[2]])
 
-tse <- sampleMetadata %>%
-    filter(
-        subject_id %in% subjects_in_both, study_name == 'HMP_2012',
-        body_subsite %in% c('subgingival_plaque', 'supragingival_plaque')
-    ) %>%
-    returnSamples(dataType = 'relative_abundance', counts = TRUE, rownames = 'short')
+
+tse <- curatedMetagenomicData(
+    'HMP_2012.relative_abundance', dryrun = FALSE, counts = TRUE,
+    rownames = 'long'
+)[[1]]
+
+colData(tse)$library_size <- colSums(assay(tse))
+
+body_subsite_lgl <-
+    colData(tse)$body_subsite %in% c('subgingival_plaque', 'supragingival_plaque')
+
+subject_id_lgl <-
+    colData(tse)$subject_id %in% subjects_in_both
+
+tse <- tse[,body_subsite_lgl & subject_id_lgl]
+tse <- tse[rowSums(assay(tse)) > 0,]
 
 # Separate elements -------------------------------------------------------
 
@@ -77,6 +87,8 @@ count_matrix <- tse %>%
 ## phylogenetic tree
 
 tree <- rowTree(tse)
+tree$tip.label <- sub('^.+\\|[a-z]__', '', tree$tip.label)
+rownames(tse) <- sub('^.+\\|[a-z]__', '', rownames(tse))
 
 # Export files ------------------------------------------------------------
 
