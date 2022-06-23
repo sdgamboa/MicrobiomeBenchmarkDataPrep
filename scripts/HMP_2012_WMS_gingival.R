@@ -89,7 +89,7 @@ count_matrix <- tse %>%
 tree <- rowTree(tse)
 tree$tip.label <- sub('^.+\\|[a-z]__', '', tree$tip.label)
 count_matrix$taxon_name <- sub('^.+\\|[a-z]__', '', count_matrix$taxon_name)
-
+taxonomy_table$taxon_name <- sub('^.+\\|[a-z]__', '', taxonomy_table$taxon_name)
 ## Check that everything works
 
 assay_data <- count_matrix %>%
@@ -97,7 +97,22 @@ assay_data <- count_matrix %>%
     as.data.frame() %>%
     as.matrix()
 
+col_data_data <- sample_metadata %>%
+    column_to_rownames(var = 'sample_id') %>%
+    as.data.frame() %>%
+    DataFrame()
 
+row_data_data <- taxonomy_table %>%
+    column_to_rownames(var = 'taxon_name') %>%
+    as.data.frame() %>%
+    DataFrame()
+
+new_tse <- TreeSummarizedExperiment(
+    assays = SimpleList(counts = assay_data),
+    colData = col_data_data,
+    rowData = row_data_data,
+    rowTree = tree
+)
 
 # Export files ------------------------------------------------------------
 
