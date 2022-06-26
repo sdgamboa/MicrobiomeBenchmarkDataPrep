@@ -58,10 +58,12 @@ sample_metadata <- sample_metadata %>%
     mutate(
         body_site = 'vagina',
         country = 'USA',
-        study_condition = ifelse(
-            nugent_score_category >= 7, 'bacterial_vaginosis', 'healthy'
+        study_condition = case_when(
+            nugent_score < 4 ~ 'healhy',
+            nugent_score >=4 & nugent_score <= 6 ~ "intermediate",
+            nugent_score >= 7 ~ 'bacterial_vaginosis'
         ),
-        gender = 'Female'
+        gender = 'female'
     )
 
 # Abundance matrix --------------------------------------------------------
