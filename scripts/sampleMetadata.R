@@ -2,25 +2,22 @@ library(dplyr)
 library(readr)
 library(purrr)
 
-format_sample_metadata <- function(df) {
-
-    ## One of the main formats is that everything is changed to lower case,
-    ## althoug this might not be what is required needed for all cases.
-
-    isSampleNameAndCharacter <- function(x) {
-        purrr::map_lgl(x, is.character) & !grepl("(SAMPLE_NAME)|(sample_name)", colnames(x))
-    }
-
-    vct_lgl <- isSampleNameAndCharacter(df)
-
-    df %>%
-        magrittr::set_colnames(., tolower(colnames(.))) %>%
-        magrittr::set_colnames(., gsub(" ", "_", colnames(.))) %>%
-        purrr::map_if(.x = ., .p = vct_lgl, .f = tolower) %>%
-        purrr::map_if(.x = ., .p = is.character, .f = ~gsub(" ", "_", .x)) %>%
-        purrr::map_at(.at = "sample_name", .f = ~ as.character(.)) %>%
-        tibble::as_tibble()
-}
+# format_sample_metadata <- function(df) {
+#
+#     isSampleNameAndCharacter <- function(x) {
+#         purrr::map_lgl(x, is.character) & !grepl("(SAMPLE_NAME)|(sample_name)", colnames(x))
+#     }
+#
+#     vct_lgl <- isSampleNameAndCharacter(df)
+#
+#     df %>%
+#         magrittr::set_colnames(., tolower(colnames(.))) %>%
+#         magrittr::set_colnames(., gsub(" ", "_", colnames(.))) %>%
+#         purrr::map_if(.x = ., .p = vct_lgl, .f = tolower) %>%
+#         purrr::map_if(.x = ., .p = is.character, .f = ~gsub(" ", "_", .x)) %>%
+#         purrr::map_at(.at = "sample_name", .f = ~ as.character(.)) %>%
+#         tibble::as_tibble()
+# }
 
 HMP_2012_16S_gingival_V13 <-
     read_tsv("data/HMP_2012_16S_gingival_V13_sample_metadata.tsv", col_types = cols(sequencing_method = col_character()))

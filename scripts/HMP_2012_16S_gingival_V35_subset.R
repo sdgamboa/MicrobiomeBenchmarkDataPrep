@@ -49,7 +49,8 @@ col_data <- colData(tse) %>%
         sequencing_method = '16S',
         variable_region_16s = 'V3-5',
         body_site = 'oral_cavity',
-        study_condition = 'control'
+        study_condition = 'control',
+        pmid = '22699609'
     )
 
 
