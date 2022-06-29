@@ -50,7 +50,8 @@ col_data <- colData(tse) %>%
         variable_region_16s = 'V3-5',
         body_site = 'oral_cavity',
         study_condition = 'control',
-        pmid = '22699609'
+        pmid = '22699609',
+        body_subsite = tolower(sub(' ', '_', body_subsite))
     )
 
 
