@@ -146,7 +146,7 @@ rowData <- taxonomy %>%
     DataFrame()
 
 tse <- TreeSummarizedExperiment(
-    assays = SimpleList(abundance = SCML_data), ## calibrated counts
+    assays = SimpleList(abundance = count_matrix), ## no calibrated counts
     colData = colData,
     rowData = rowData,
     rowTree = rowTree
@@ -156,11 +156,11 @@ tse <- TreeSummarizedExperiment(
 
 ## Add library size to sample metadata
 
-col_data$library_size <- colSums(SCML_data)
+col_data$library_size <- colSums(count_matrix)
 col_data$sequencing_method <- '16S'
 col_data$variable_region_16s <- 'V3-6'
 
-SCML_data_df <- SCML_data %>%
+count_df <- count_matrix %>%
     as.data.frame() %>%
     rownames_to_column(var = 'taxon_name') %>%
     as_tibble()
@@ -168,7 +168,7 @@ SCML_data_df <- SCML_data %>%
 ## Sample metadata
 write_tsv(col_data, "data/Stammler_2016_16S_spikein_sample_metadata.tsv")
 ## Count matrix
-write_tsv(SCML_data_df, 'data/Stammler_2016_16S_spikein_count_matrix.tsv')
+write_tsv(count_df, 'data/Stammler_2016_16S_spikein_count_matrix.tsv')
 ## Taxonomy table
 write_tsv(taxonomy, "data/Stammler_2016_16S_spikein_taxonomy_table.tsv")
 
