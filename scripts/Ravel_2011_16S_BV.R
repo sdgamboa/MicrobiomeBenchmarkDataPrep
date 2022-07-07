@@ -59,7 +59,7 @@ sample_metadata <- sample_metadata %>%
         body_site = 'vagina',
         country = 'USA',
         study_condition = case_when(
-            nugent_score < 4 ~ 'healhy',
+            nugent_score < 4 ~ 'healthy',
             nugent_score >=4 & nugent_score <= 6 ~ "intermediate",
             nugent_score >= 7 ~ 'bacterial_vaginosis'
         ),
